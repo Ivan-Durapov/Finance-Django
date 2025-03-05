@@ -10,12 +10,21 @@
     <header class="bg-primary text-white py-3">
         <div class="container d-flex justify-content-between">
             <h1 class="h4">Finance</h1>
-            <nav>
+            {% if user.is_authenticated %}
+            <div class="d-flex flex-grow-1 justify-content-center">
+                <a class="btn btn-outline-light me-2" href="{% url 'table_list' %}">Таблиці</a>
+                <a class="btn btn-outline-light" href="{% url 'transaction_list' %}">Транзакції</a>
+            </div>
+            {% endif %}
+            <nav class="d-flex align-items-center">
                 {% if user.is_authenticated %}
                     <span class="me-3">{{ user.email }}</span>
-                    <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+                    <form method="post" action="{% url 'logout' %}" style="width: 77px;">
+                        {% csrf_token %}
+                        <button class="btn btn-danger" type="submit">Logout</button>
+                    </form>
                 {% else %}
-                    <a href="{% url 'login' %}" class="btn btn-success">Sign In</a>
+                    <a href="{% url 'login' %}" class="btn btn-success me-2">Sign In</a>
                     <a href="{% url 'register' %}" class="btn btn-success">Sign Up</a>
                 {% endif %}
             </nav>

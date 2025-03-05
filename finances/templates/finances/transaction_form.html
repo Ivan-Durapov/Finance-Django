@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4 p-4 shadow-sm rounded bg-light">
+    <h2 class="text-center text-primary">
+        {% if form.instance.pk %}Редагувати транзакцію{% else %}Додати транзакцію{% endif %}
+    </h2>
+    
+    <form method="POST" class="form-group mt-4">
+        {% csrf_token %}
+        
+        <div class="mb-3">
+            <label for="id_amount" class="form-label">Сума:</label>
+            {{ form.amount }}
+        </div>
+
+        <div class="mb-3">
+            <label for="id_currency" class="form-label">Валюта:</label>
+            {{ form.currency }}
+        </div>
+
+        <div class="mb-3">
+            <label for="id_date" class="form-label">Дата:</label>
+            {{ form.date }}
+        </div>
+
+        <div class="mb-3">
+            <label for="id_categories" class="form-label">Категорії:</label>
+            {{ form.categories }}
+        </div>
+
+        <div class="mb-3">
+            <label for="id_table" class="form-label">Таблиця:</label>
+            {{ form.table }}
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-outline-success">Зберегти</button>
+            <a href="{% url 'transaction_list' %}" class="btn btn-outline-primary">До списку транзакцій</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

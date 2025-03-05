@@ -3,6 +3,7 @@ from django.db import models
 
 # Create your models here.
 
+
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
         if not email:
@@ -19,7 +20,8 @@ class CustomUserManager(BaseUserManager):
         extra_fields.setdefault("is_superuser", True)
 
         return self.create_user(email, password, **extra_fields)
-    
+
+
 class User(AbstractUser):
     username = None
     email = models.EmailField(unique=True)
